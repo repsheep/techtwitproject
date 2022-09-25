@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}ひとくち技術録-Python{% endblock %}
+        {% block header %}
+    
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({% static 'assets/img/home-bg.jpg' %})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>ひとくち技術録</h1>
+                            <span class="subheading">Pythonカテゴリの投稿一覧　　　　　　　　　　　　
+        　　　　　　　　　　　　　　　　</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% endblock %}
+        
+        {% block contents %}
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    {% for record in python_records %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="{% url 'techtwitapp:record_detail' record.pk %}">
+                            <h2 class="post-title">{{record.title}}</h2>
+                            <h3 class="post-subtitle">
+                                <span style="font-size : 14pt">
+                                    {{record.question|truncatechars:50}}
+                                </span>
+                            </h3>
+                        </a>
+                        <p class="post-meta">
+                            <a href="#">Repsheep</a>
+                            
+                            {{record.posted_at}}に投稿/カテゴリ:
+                            
+                            {{record.category}}</p>
+                        </p>
+                    </div>
+                    {% endfor %}
+                 
+                    <!-- Pager-->
+                    {% include "pagination.html" %}
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        <!-- Footer-->

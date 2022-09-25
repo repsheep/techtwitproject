@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Post</title>
+    </head>
+    
+    <body>
+    <br>
+        <div class="container">
+            <div class="row">
+                <div class="col offset-2">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <th>カテゴリ</th>
+                                <td>{{ form.category }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>タイトル</th>
+                                <td>{{ form.title }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>課題・解決したいこと</th>
+                                <td>{{ form.question }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>解決策</th>
+                                <td>{{ form.answer }}</td?
+                            </tr>
+                        </table>
+                        <hr>
+                        <button type="submit">投稿する</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

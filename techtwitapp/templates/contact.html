@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}お問い合わせ{% endblock %}
+    {% block header %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Contact Me</h1>
+                            <span class="subheading">お問い合わせがございますか?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    {% endblock %}
+        <!-- Main Content-->
+        {% block contents %}
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <strong>以下のフォールからメッセージを送信出来ます。</strong>
+                        {% if messages %}
+                        <ul class="list-unstyled" style="list-style: none;">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="my-5">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                  <div class="form-floating">
+                                      <div class="form-group floating-label-form-group controls">
+                                          {{ field.label_tag }}
+                                          {{ field }}
+                                          <p class="help-block text-danger"></p>
+                                      </div>
+                                 </div>
+                                 {% endfor %}
+                                 
+                                 <br>
+                                 
+                                 <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </main>
+        {% endblock %}
+        

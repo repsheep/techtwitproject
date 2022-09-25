@@ -1,0 +1,70 @@
+<!-- ページネーションのアイコンを左右中央に配置 -->
+<ul class="pagination"
+    style="justify-content:center">
+    <!--
+    前ページを表示するアイコンとリンクの設定
+    ページネーションされたPageオブジェクトをorderby_recordsで取得
+    Page.has_previous: 直前にページがある場合にTrueを返す
+    -->
+    {% if page_obj.has_previous %}
+    <!--
+    前のページが存在する場合はそのページへのリンクが設定されたアイコン[<<]を表示
+    Page.previous_page_number: 直前のページ番号を返す
+    -->
+    <li class="page-item">
+        <a class="page-link"
+        　　 href="?page={{ page_obj.previous_page_number }}"
+        　　 aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    {% endif %}
+    <!--
+     すべてのページについてページ番号のアイコンを表示
+     paginator.page_range: [1, 2, 3, 4] のように1から始まるページ番号を返す
+     page_obj.paginator.page_rangeとして取得
+     ブロックパラメーターnumに順次取り出される
+    -->
+    {% for num in page_obj.paginator.page_range %}
+        <!--
+        各ページのアイコンを出力
+        Page.number: 引き渡されたページのページ番号を返す
+        -->
+        {% if page_obj.number == num %}
+        <!--
+        処理中のページ番号が引き渡されたページのページ番号と一致する場合は
+        ページ番号のアイコン(アクティブ状態)を表示(リンクは設定しない)
+        -->
+        <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+        </li>
+        <!--
+        ページ番号が引き渡されたページのページ番号と一致しない場合
+        -->
+        {% else %}
+        <!--
+        ページ番号のアイコン(アクティブ状態ではない)にリンクを設定して表示
+        -->
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+    <!--
+    次ページへのリンクを示すアイコンの表示
+    Page.has_next: 次のページがある場合にTrueを返す
+    -->
+    {% if page_obj.has_next %}
+    <!--
+    次ページが存在する場合はリンクを設定したアイコン［>>]を表示
+    Page.next_page_number: 次のページ番号を返す
+    -->
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number }}"
+           aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endif %}
+</ul>
